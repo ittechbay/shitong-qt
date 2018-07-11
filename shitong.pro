@@ -14,28 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    dialog_ptpcfg.cpp \
-    dialog_clockcfg.cpp \
-    dialog_swich.cpp \
-    dialog_b.cpp \
-    dialog_power.cpp \
-    dialog_123.cpp
+    ctrbuttonform.cpp
 
 HEADERS  += widget.h \
-    dialog_ptpcfg.h \
-    dialog_clockcfg.h \
-    dialog_swich.h \
-    dialog_b.h \
-    dialog_power.h \
-    dialog_123.h
+    ctrbuttonform.h
 
 FORMS    += widget.ui \
-    dialog_ptpcfg.ui \
-    dialog_clockcfg.ui \
-    dialog_swich.ui \
-    dialog_b.ui \
-    dialog_power.ui \
-    dialog_123.ui
+    ctrbuttonform.ui
 
 RESOURCES += \
     res.qrc
