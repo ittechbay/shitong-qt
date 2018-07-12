@@ -13,9 +13,9 @@ class ctrButtonForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit ctrButtonForm(QWidget *parent = 0);
+    explicit ctrButtonForm(const QString &title, QWidget *parent = 0);
     //explicit ctrButtonForm(QWidget *parent = 0, QString s1, QString s2,QString s3,QString s4);
-    void addSubTitle( QString &s);
+    void addSubTitle(const  QString &s);
     void addSubLed( QString &s);
     void addSubLed(QPixmap *pixmap);
     void replaceSubLed(int index, QPixmap *pixmap);
@@ -27,7 +27,8 @@ public:
     ~ctrButtonForm();
 
 
-    Ui::ctrButtonForm *ui;
+
+    QString title;
     QVector<QString> subTitle;
     QVector<QString> ledState;
     QPixmap *ledMain;

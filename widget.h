@@ -21,8 +21,8 @@ public:
 private slots:
 
 
-private:
-    Ui::Widget *ui;
+
+
 
 
 };

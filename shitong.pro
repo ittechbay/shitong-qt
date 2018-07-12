@@ -14,13 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    ctrbuttonform.cpp
+    ctrbuttonform.cpp \
+    clock.cpp \
+    form.cpp
 
 HEADERS  += widget.h \
-    ctrbuttonform.h
+    ctrbuttonform.h \
+    clock.h \
+    form.h
 
-FORMS    += widget.ui \
-    ctrbuttonform.ui
+FORMS    += \
+    form.ui
 
 RESOURCES += \
     res.qrc
