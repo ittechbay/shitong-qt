@@ -16,15 +16,22 @@ SOURCES += main.cpp\
         widget.cpp \
     ctrbuttonform.cpp \
     clock.cpp \
-    form.cpp
+    form.cpp \
+    form2.cpp \
+    boardbutton.cpp
 
 HEADERS  += widget.h \
     ctrbuttonform.h \
     clock.h \
-    form.h
+    form.h \
+    form2.h \
+    boardbutton.h
 
 FORMS    += \
-    form.ui
+    form.ui \
+    form1.ui \
+    form2.ui \
+    boardbutton.ui
 
 RESOURCES += \
     res.qrc

@@ -10,6 +10,7 @@
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QLabel>
+#include <QDateTimeEdit>
 
 
 #if 0
@@ -232,39 +233,56 @@ Widget::Widget(QWidget *parent) :
    hbox1->addWidget(but21);
 
    ///
-    QGroupBox *groupBox2 = new QGroupBox(tr("时间"));
-   //groupBox1->setMinimumSize(600,210);
-   groupBox2->setStyleSheet("color:white;");
+   /// \brief groupBox2
+   ///
    QVBoxLayout *vbox0 = new QVBoxLayout;
-    groupBox2->setLayout(vbox0);
+   QGroupBox *groupBox2 = new QGroupBox(tr("时间"));
+   groupBox2->setMinimumHeight(150);
+   groupBox2->setStyleSheet("color:white;");
+
+   QVBoxLayout *vbox00 = new QVBoxLayout;
+   groupBox2->setLayout(vbox00);
+   QTimeEdit *timeEdit = new QTimeEdit();
+   QDateTimeEdit  *dateEdit = new QDateTimeEdit ();
+
+    vbox00->addWidget(timeEdit);
+    vbox00->addWidget(dateEdit);
+    timeEdit->setCalendarPopup(true);
+    dateEdit->setCalendarPopup(true);
 
 
 
-    FTSClock *clk = new FTSClock;
-    vbox0->addWidget(clk,0, Qt::AlignHCenter);
-    clk->setMinimumSize(105,105);
-    QLabel *label20 = new QLabel(tr("12:10:11"));
-    //vbox0->addWidget(label20);
-    QLabel *label21 = new QLabel(tr("1998/10/11"));
-    //vbox0->addWidget(label21);
-   //
-    QVBoxLayout *vbox1 = new QVBoxLayout;
-    QGroupBox *groupBox3 = new QGroupBox(tr("报警"));
-    groupBox3->setMinimumHeight(130);
+    QGroupBox *groupBox3 = new QGroupBox(tr("精度"));
+    groupBox3->setMinimumHeight(60);
     groupBox3->setStyleSheet("color:white;");
-    QGroupBox *groupBox4 = new QGroupBox(tr("精度"));
-    groupBox4->setMinimumHeight(60);
+    vbox0->addWidget(groupBox2);
+    vbox0->addWidget(groupBox3);
+
+
+
+
+    //QLabel *label20 = new QLabel(tr("12:10:11"));
+    //vbox0->addWidget(label20);
+    //QLabel *label21 = new QLabel(tr("1998/10/11"));
+    //vbox0->addWidget(label21);
+
+    //
+    QVBoxLayout *vbox1 = new QVBoxLayout;
+    QGroupBox *groupBox4 = new QGroupBox(tr("报警"));
+    groupBox4->setMinimumHeight(130);
     groupBox4->setStyleSheet("color:white;");
+
+
     QGroupBox *groupBox5 = new QGroupBox();
     groupBox5->setStyleSheet("color:white;");
-    vbox1->addWidget(groupBox3);
+
     vbox1->addWidget(groupBox4);
     vbox1->addWidget(groupBox5);
 
     //
     mainLayout->addWidget(groupBox0, 0, 0);
     mainLayout->addWidget(groupBox1, 1, 0);
-    mainLayout->addWidget(groupBox2, 0, 1);
+    mainLayout->addLayout(vbox0, 0, 1);
     mainLayout->addLayout(vbox1, 1, 1);
 
 

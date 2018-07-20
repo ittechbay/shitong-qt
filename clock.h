@@ -9,6 +9,10 @@ class FTSClock : public QWidget
 public:
     explicit FTSClock(QWidget *parent = 0);
     void paintEvent(QPaintEvent *ev);
+    int hourArrawPos;
+    int minuteArrawPos;
+    void setHourArrawPos(int n);
+    void setMinuteArrawPos(int n);
 
 signals:
 
