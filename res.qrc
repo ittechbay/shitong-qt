@@ -1,9 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>img/dark.png</file>
-        <file>img/green.png</file>
-        <file>img/red.png</file>
         <file>img/add.png</file>
         <file>img/sub.png</file>
+        <file>img/gray_led.bmp</file>
+        <file>img/gray_led_.bmp</file>
+        <file>img/green_led.bmp</file>
+        <file>img/green_led_.bmp</file>
+        <file>img/red_led.bmp</file>
+        <file>img/red_led_.bmp</file>
     </qresource>
 </RCC>
