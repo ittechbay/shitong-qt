@@ -16,11 +16,8 @@ public:
     ~Widget();
 
 private slots:
-    void on_frame_destroyed();
 
-    void on_pushButton_pressed();
 
-    void on_pushButton_clicked();
 
 private:
     Ui::Widget *ui;

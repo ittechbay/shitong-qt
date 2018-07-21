@@ -32,7 +32,7 @@ Widget::Widget(QWidget *parent) :
 
     ui->frame_13->setBoard(QApplication::translate("BoardButton", "电源A", 0));
     ui->frame_14->setBoard(QApplication::translate("BoardButton", "电源B", 0));
-    ui->frame_15->setBoard(QApplication::translate("BoardButton", "输出", 0));
+    ui->frame_15->setNullBoard();
     ui->frame_16->setBoard(QApplication::translate("BoardButton", "输出", 0));
     ui->frame_17->setBoard(QApplication::translate("BoardButton", "输出", 0));
     ui->frame_18->setBoard(QApplication::translate("BoardButton", "输出", 0));
@@ -59,19 +59,5 @@ Widget::~Widget()
 }
 
 
-void Widget::on_pushButton_pressed()
-{
-    //ui->widget->styleSheet();
-    qDebug() << "styleSheet : " << ui->widget->styleSheet() << endl;
-    ui->widget->setStyleSheet(QString());
-}
 
-void Widget::on_pushButton_clicked()
-{
 
-}
-
-void Widget::on_frame_destroyed()
-{
-
-}

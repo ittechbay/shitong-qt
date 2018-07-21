@@ -19,9 +19,12 @@ public:
     void setBoard(const QString &boardName,const QString &s1, const QString &s2);
     void setBoard(const QString &boardName,const QString &s1, const QString &s2, const QString &s3);
     void setBoard(const QString &boardName,const QString &s1, const QString &s2, const QString &s3, const QString &s4);
+    void setNullBoard();
+
 
 private:
     Ui::BoardButton *ui;
+    bool enable;
 };
 
 #endif // BOARDBUTTON_H

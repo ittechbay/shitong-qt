@@ -319,25 +319,50 @@
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QWidget" name="widget_2" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>5</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QGroupBox" name="groupBox_7">
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>160</height>
+          <height>180</height>
          </size>
         </property>
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="title">
-         <string>时间</string>
+         <string/>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
-           <x>3</x>
-           <y>13</y>
-           <width>190</width>
+           <x>5</x>
+           <y>15</y>
+           <width>217</width>
            <height>140</height>
           </rect>
          </property>
@@ -353,14 +378,17 @@
             <property name="font">
              <font>
               <family>Arial</family>
-              <pointsize>40</pointsize>
+              <pointsize>35</pointsize>
               <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
              </font>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="styleSheet">
-             <string notr="true">font: 40pt &quot;Arial&quot;;</string>
+             <string notr="true">font: 35pt &quot;Arial&quot;;</string>
             </property>
             <property name="frame">
              <bool>false</bool>
@@ -368,8 +396,27 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
             <property name="buttonSymbols">
              <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="maximumDateTime">
+             <datetime>
+              <hour>23</hour>
+              <minute>59</minute>
+              <second>59</second>
+              <year>2000</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="currentSection">
+             <enum>QDateTimeEdit::HourSection</enum>
+            </property>
+            <property name="displayFormat">
+             <string>H:mm:ss</string>
             </property>
             <property name="time">
              <time>
@@ -387,6 +434,9 @@
               <width>0</width>
               <height>30</height>
              </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">font: 20pt &quot;ADMUI3Lg&quot;;</string>
@@ -412,8 +462,56 @@
          <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="title">
-         <string>精度</string>
+         <string/>
         </property>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>3</y>
+           <width>152</width>
+           <height>48</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>初始化</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>时钟</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>同步中</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>参考源</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>GPS</string>
+            </property>
+           </widget>
+          </item>
+
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -425,7 +523,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>160</height>
+          <height>0</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -434,67 +532,36 @@
         <property name="title">
          <string>报警</string>
         </property>
-        <widget class="QWidget" name="widget" native="true">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>70</y>
-           <width>21</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">image: url(:/img/red_led.bmp);
-color: rgb(255, 255, 255);
-color: rgb(85, 255, 0);</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>110</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-        <widget class="QTimeEdit" name="timeEdit_2">
-         <property name="geometry">
-          <rect>
-           <x>30</x>
-           <y>30</y>
-           <width>118</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>ADMUI3Lg</family>
-           <pointsize>28</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font: 28pt &quot;ADMUI3Lg&quot;;</string>
-         </property>
-        </widget>
        </widget>
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox_6">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">color: rgb(255, 255, 255);
 </string>
         </property>
         <property name="title">
-         <string>版本</string>
+         <string/>
         </property>
+        <widget class="QLabel" name="label_5">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>10</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>版本 V1.0</string>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>

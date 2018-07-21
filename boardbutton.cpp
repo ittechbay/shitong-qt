@@ -24,8 +24,6 @@ void BoardButton::setBoard(const QString &boardName)
     ui->widget_4->setStyleSheet(QString());
     ui->label_5->setText(QString());
     ui->widget_5->setStyleSheet(QString());
-
-
 }
 
 void BoardButton::setBoard(const QString &boardName,const QString &s1)
@@ -81,4 +79,29 @@ void BoardButton::setBoard(const QString &boardName,const QString &s1, const QSt
     ui->label_5->setText(s4);
     //ui->widget_5->setStyleSheet(QString());
 }
+
+void BoardButton::setNullBoard()
+{
+    this->setStyleSheet(QStringLiteral("background-color: rgb(100, 120, 140);"));
+    //ui->setSylesheet("background-color: rgb(100, 120, 140);");
+    //ui::BoardButton->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
+    ui->label->setText((QApplication::translate("BoardButton", "输出", 0)));
+    ui->widget->setStyleSheet(QString());
+    ui->label_2->setText(QString());
+    ui->widget_2->setStyleSheet(QString());
+    ui->label_3->setText(QString());
+    ui->widget_3->setStyleSheet(QString());
+    ui->label_4->setText(QString());
+    ui->widget_4->setStyleSheet(QString());
+    ui->label_5->setText(QString());
+    ui->widget_5->setStyleSheet(QString());
+}
+
+
+
+
+
+
+
+
 

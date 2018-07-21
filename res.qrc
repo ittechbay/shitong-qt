@@ -8,5 +8,6 @@
         <file>img/green_led_.bmp</file>
         <file>img/red_led.bmp</file>
         <file>img/red_led_.bmp</file>
+        <file>img/board_bg.bmp</file>
     </qresource>
 </RCC>
