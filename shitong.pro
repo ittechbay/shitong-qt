@@ -14,14 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    boardbutton.cpp
+    boardbutton.cpp \
+    mainpanel.cpp
 
 HEADERS  += widget.h \
-    boardbutton.h
+    boardbutton.h \
+    mainpanel.h
 
 FORMS    += \
     boardbutton.ui \
-    widget.ui
+    widget.ui \
+    mainpanel.ui
 
 RESOURCES += \
     res.qrc
