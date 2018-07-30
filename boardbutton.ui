@@ -6,15 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>42</width>
-    <height>200</height>
+    <width>40</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(230, 230, 230);</string>
+   <string notr="true">background-color: rgb(230, 230, 230);
+border-color: rgb(49, 49, 49);</string>
   </property>
   <property name="frameShape">
    <enum>QFrame::Panel</enum>
@@ -33,25 +34,6 @@
    </property>
    <property name="styleSheet">
     <string notr="true">image: url(:/img/green_led_.bmp);</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>5</x>
-     <y>187</y>
-     <width>30</width>
-     <height>12</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string>title</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -215,4 +197,8 @@
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <signal>clicked()</signal>
+  <slot>click()</slot>
+ </slots>
 </ui>

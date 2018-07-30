@@ -40,124 +40,40 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="BoardButton" name="frame">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_2">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_2"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_3">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_3"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_4">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_4"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_5">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_5"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_6">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_6"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_7">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_7"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_8">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_8"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_9">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_9"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_10">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_10"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_11">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_11"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_12">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_12"/>
       </item>
      </layout>
     </widget>
@@ -216,14 +132,14 @@
       <item>
        <widget class="QLabel" name="label_23">
         <property name="text">
-         <string>输出</string>
+         <string>GNSSA</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_24">
         <property name="text">
-         <string>GNSS</string>
+         <string>GNSSB</string>
         </property>
        </widget>
       </item>
@@ -273,124 +189,40 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="BoardButton" name="frame_13">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_13"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_14">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_14"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_15">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_15"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_16">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_16"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_17">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_17"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_18">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_18"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_19">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_19"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_20">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_20"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_21">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_21"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_22">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_22"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_23">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_23"/>
       </item>
       <item>
-       <widget class="BoardButton" name="frame_24">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <widget class="BoardButton" name="frame_24"/>
       </item>
      </layout>
     </widget>
@@ -492,19 +324,6 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>180</y>
-     <width>54</width>
-     <height>12</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -574,73 +393,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>300</y>
-     <width>240</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>报警</string>
-   </property>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>201</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkBox">
-       <property name="text">
-        <string>参考源</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QCheckBox" name="checkBox_2">
-       <property name="text">
-        <string>时钟</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QCheckBox" name="checkBox_5">
-       <property name="text">
-        <string>B码</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="checkBox_3">
-       <property name="text">
-        <string>1pps</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QCheckBox" name="checkBox_4">
-       <property name="text">
-        <string>PTP</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QCheckBox" name="checkBox_6">
-       <property name="text">
-        <string>NTP</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -670,10 +422,16 @@
       </property>
       <property name="iconSize">
        <size>
-        <width>20</width>
+        <width>50</width>
         <height>20</height>
        </size>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
     </item>
     <item>
@@ -681,6 +439,9 @@
       <property name="text">
        <string>时频A</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
     </item>
     <item>
@@ -688,6 +449,9 @@
       <property name="text">
        <string>时频B</string>
       </property>
+      <attribute name="buttonGroup">
+       <string notr="true">buttonGroup</string>
+      </attribute>
      </widget>
     </item>
    </layout>
@@ -695,7 +459,7 @@
   <widget class="QFrame" name="frame_25">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>555</x>
      <y>15</y>
      <width>240</width>
      <height>140</height>
@@ -712,7 +476,7 @@
      <rect>
       <x>5</x>
       <y>0</y>
-      <width>230</width>
+      <width>241</width>
       <height>140</height>
      </rect>
     </property>
@@ -737,8 +501,11 @@
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
        <property name="styleSheet">
-        <string notr="true">font: 35pt &quot;Arial&quot;;</string>
+        <string notr="true"/>
        </property>
        <property name="frame">
         <bool>false</bool>
@@ -785,11 +552,18 @@
          <height>30</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 20pt &quot;ADMUI3Lg&quot;;</string>
+        <string notr="true"/>
        </property>
        <property name="frame">
         <bool>false</bool>
@@ -808,123 +582,11 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QFrame" name="frame_26">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>160</y>
-     <width>240</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::Box</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QWidget" name="layoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>5</x>
-      <y>0</y>
-      <width>230</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_3">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_19">
-       <property name="text">
-        <string>时频板</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_42">
-       <property name="text">
-        <string>参考源</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_43">
-       <property name="text">
-        <string>状态</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QLabel" name="label_44">
-       <property name="text">
-        <string>时差(0.1μs)</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_45">
-       <property name="text">
-        <string>时频A</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_46">
-       <property name="text">
-        <string>GPS-已锁定</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_47">
-       <property name="text">
-        <string>初始化</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_48">
-       <property name="text">
-        <string>20</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_49">
-       <property name="text">
-        <string>时频B</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="label_50">
-       <property name="text">
-        <string>北斗-未锁定</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_51">
-       <property name="text">
-        <string>保持</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QLabel" name="label_52">
-       <property name="text">
-        <string>15</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
   <widget class="QFrame" name="frame_27">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>260</y>
+     <x>555</x>
+     <y>350</y>
      <width>241</width>
      <height>41</height>
     </rect>
@@ -962,6 +624,134 @@
     </layout>
    </widget>
   </widget>
+  <widget class="StateTable" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>555</x>
+     <y>210</y>
+     <width>242</width>
+     <height>86</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableView {selection-background-color: red;}</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectItems</enum>
+   </property>
+   <property name="showGrid">
+    <bool>true</bool>
+   </property>
+   <property name="cornerButtonEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="rowCount">
+    <number>2</number>
+   </property>
+   <property name="columnCount">
+    <number>4</number>
+   </property>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>60</number>
+   </attribute>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderHighlightSections">
+    <bool>true</bool>
+   </attribute>
+   <row>
+    <property name="text">
+     <string>New Row</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>New Row</string>
+    </property>
+   </row>
+   <column>
+    <property name="text">
+     <string>时频</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>参考源</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>状态</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>时差</string>
+    </property>
+   </column>
+   <item row="0" column="0">
+    <property name="text">
+     <string>A</string>
+    </property>
+   </item>
+   <item row="0" column="1">
+    <property name="text">
+     <string>GNSSA-已锁定</string>
+    </property>
+   </item>
+   <item row="0" column="2">
+    <property name="text">
+     <string>跟踪</string>
+    </property>
+   </item>
+   <item row="0" column="3">
+    <property name="text">
+     <string>11</string>
+    </property>
+   </item>
+   <item row="1" column="0">
+    <property name="text">
+     <string>B</string>
+    </property>
+   </item>
+   <item row="1" column="1">
+    <property name="text">
+     <string>北斗-未锁定</string>
+    </property>
+   </item>
+   <item row="1" column="2">
+    <property name="text">
+     <string>初始化</string>
+    </property>
+   </item>
+   <item row="1" column="3">
+    <property name="text">
+     <string>23</string>
+    </property>
+   </item>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
@@ -969,8 +759,20 @@
    <extends>QFrame</extends>
    <header>boardbutton.h</header>
    <container>1</container>
+   <slots>
+    <signal>clicked()</signal>
+    <slot>click1()</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>StateTable</class>
+   <extends>QTableWidget</extends>
+   <header>statetable.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

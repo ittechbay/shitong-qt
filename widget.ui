@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>480</height>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 127);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -779,6 +779,16 @@ border-color: rgb(0, 0, 255);
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QFrame" name="frame_25">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>580</y>
+     <width>120</width>
+     <height>80</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <customwidgets>
