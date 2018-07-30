@@ -32,8 +32,8 @@ mainPanel::mainPanel(QWidget *parent) :
                            QApplication::translate("BoardButton", "TOD", 0),
                            QApplication::translate("BoardButton", "B", 0));
 
-    ui->frame_13->setBoard();
-    ui->frame_14->setBoard();
+    ui->frame_13->setNullBoard();
+    ui->frame_14->setNullBoard();
     ui->frame_15->setNullBoard();
     ui->frame_16->setNullBoard();
     ui->frame_17->setNullBoard();
@@ -44,15 +44,12 @@ mainPanel::mainPanel(QWidget *parent) :
     ui->frame_22->setNullBoard();
     ui->frame_23->setNullBoard();
 
-    ui->frame_24->setBoard(QApplication::translate("BoardButton", "10M", 0),
-                           QApplication::translate("BoardButton", "1pps", 0),
-                           QApplication::translate("BoardButton", "TOD", 0),
-                           QApplication::translate("BoardButton", "B", 0));
+    ui->frame_24->setNullBoard();
 
 
 
 
-    ui->tableWidget->setStyleSheet("QTableView {selection-background-color: red;}");
+    ui->tableWidget->setStyleSheet("QTableView {selection-background-color: green;}");
     QTableWidgetSelectionRange *ws = new QTableWidgetSelectionRange(1,1,2,2);
     ui->tableWidget->setRangeSelected(QTableWidgetSelectionRange(0,0,0,3), true);
     ui->tableWidget->setColumnWidth(0,50);
@@ -96,11 +93,14 @@ void mainPanel::on_frame_4_clicked()
 
 void mainPanel::on_pushButton_2_clicked()
 {
-
+ui->tableWidget->setRangeSelected(QTableWidgetSelectionRange(0,0,0,3), true);
+ui->tableWidget->setRangeSelected(QTableWidgetSelectionRange(1,0,1,3), false);
 }
 
 void mainPanel::on_pushButton_4_clicked()
 {
-    SetAlarm w;
-    w.exec();
+    //SetAlarm w;
+    //w.exec();
+    ui->tableWidget->setRangeSelected(QTableWidgetSelectionRange(0,0,0,3), false);
+    ui->tableWidget->setRangeSelected(QTableWidgetSelectionRange(1,0,1,3), true);
 }
