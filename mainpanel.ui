@@ -92,18 +92,12 @@
         <property name="text">
          <string>电源A</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_8">
         <property name="text">
          <string>电源B</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -112,18 +106,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_20">
         <property name="text">
          <string>输出</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -132,18 +120,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_22">
         <property name="text">
          <string>输出</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -152,18 +134,12 @@
         <property name="text">
          <string>GNSSA</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_24">
         <property name="text">
          <string>GNSSB</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -172,18 +148,12 @@
         <property name="text">
          <string>外监</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_26">
         <property name="text">
          <string>时频A</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -192,18 +162,12 @@
         <property name="text">
          <string>切换</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_27">
         <property name="text">
          <string>时频A</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -277,18 +241,12 @@
         <property name="text">
          <string>电源A</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_30">
         <property name="text">
          <string>电源A</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -297,18 +255,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_32">
         <property name="text">
          <string>输出</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -317,18 +269,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_34">
         <property name="text">
          <string>输出</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -337,18 +283,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_36">
         <property name="text">
          <string>输出</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -357,18 +297,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_38">
         <property name="text">
          <string>输出</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -377,18 +311,12 @@
         <property name="text">
          <string>输出</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_40">
         <property name="text">
          <string>分配</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -537,9 +465,6 @@
      <height>140</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
@@ -550,9 +475,9 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>5</y>
-      <width>230</width>
-      <height>130</height>
+      <y>0</y>
+      <width>241</width>
+      <height>140</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -730,7 +655,7 @@
     <set>QAbstractItemView::NoEditTriggers</set>
    </property>
    <property name="selectionMode">
-    <enum>QAbstractItemView::NoSelection</enum>
+    <enum>QAbstractItemView::MultiSelection</enum>
    </property>
    <property name="selectionBehavior">
     <enum>QAbstractItemView::SelectItems</enum>
