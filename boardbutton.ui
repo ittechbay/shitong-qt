@@ -33,7 +33,7 @@ border-color: rgb(49, 49, 49);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">image: url(:/img/green_led_.bmp);</string>
+    <string notr="true">image: url(:/new/prefix1/img/red_led_.bmp);</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -42,7 +42,7 @@ border-color: rgb(49, 49, 49);</string>
      <x>3</x>
      <y>27</y>
      <width>32</width>
-     <height>151</height>
+     <height>164</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -58,7 +58,8 @@ border-color: rgb(49, 49, 49);</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">image: url(:/img/green_led.bmp);</string>
+       <string notr="true">image: url(:/new/prefix1/img/red_led.bmp);
+</string>
       </property>
      </widget>
     </item>
@@ -97,7 +98,7 @@ border-color: rgb(49, 49, 49);</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">image: url(:/img/green_led.bmp);</string>
+       <string notr="true">image: url(:/new/prefix1/img/green_led.bmp);</string>
       </property>
      </widget>
     </item>
@@ -136,7 +137,7 @@ border-color: rgb(49, 49, 49);</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">image: url(:/img/green_led.bmp);</string>
+       <string notr="true">image: url(:/new/prefix1/img/green_led.bmp);</string>
       </property>
      </widget>
     </item>
@@ -175,7 +176,7 @@ border-color: rgb(49, 49, 49);</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">image: url(:/img/green_led.bmp);</string>
+       <string notr="true">image: url(:/new/prefix1/img/green_led.bmp);</string>
       </property>
      </widget>
     </item>

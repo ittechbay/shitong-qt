@@ -77,6 +77,5 @@ s1 = dt->timeZone().displayName(QTimeZone::StandardTime, QTimeZone::LongName,QLo
     *dt =  dt->toTimeZone(*tz);
     s1 = dt->timeZone().displayName(QTimeZone::StandardTime, QTimeZone::LongName,QLocale::system());
      qDebug() << "##"<<s1<<"##"<<dt->toString() << endl;
-
-
 }
+

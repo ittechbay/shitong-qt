@@ -17,7 +17,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-
+    void onTimerOut();
 
 
     void on_frame_3_clicked();
@@ -33,6 +33,7 @@ private slots:
 
 private:
     Ui::mainPanel *ui;
+    QTimer *timer;
 };
 
 #endif // MAINPANEL_H

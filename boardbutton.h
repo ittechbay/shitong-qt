@@ -22,6 +22,11 @@ public:
     void setNullBoard();
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void setLedColor(const Qt::GlobalColor &color);
+    void setLedColor_sub1(const Qt::GlobalColor &color);
+    void setLedColor_sub2(const Qt::GlobalColor &color);
+    void setLedColor_sub3(const Qt::GlobalColor &color);
+    void setLedColor_sub4(const Qt::GlobalColor &color);
 
 private:
     Ui::BoardButton *ui;

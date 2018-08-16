@@ -1,13 +1,13 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/new/prefix1">
+        <file>img/board_bg.bmp</file>
+        <file>img/gray_led_.bmp</file>
+        <file>img/gray_led.bmp</file>
+        <file>img/green_led_.bmp</file>
+        <file>img/green_led.bmp</file>
+        <file>img/red_led_.bmp</file>
+        <file>img/red_led.bmp</file>
         <file>img/add.png</file>
         <file>img/sub.png</file>
-        <file>img/gray_led.bmp</file>
-        <file>img/gray_led_.bmp</file>
-        <file>img/green_led.bmp</file>
-        <file>img/green_led_.bmp</file>
-        <file>img/red_led.bmp</file>
-        <file>img/red_led_.bmp</file>
-        <file>img/board_bg.bmp</file>
     </qresource>
 </RCC>

@@ -1,5 +1,6 @@
 #include "boardbutton.h"
 #include "ui_boardbutton.h"
+#include <QColor>
 
 BoardButton::BoardButton(QWidget *parent) :
     QFrame(parent),
@@ -97,6 +98,36 @@ void BoardButton::setNullBoard()
     ui->widget_5->setStyleSheet(QString());
 }
 
+void BoardButton::setLedColor(const Qt::GlobalColor &color)
+{
+    if (color == Qt::green)
+        ui->widget->setStyleSheet(QString("image: url(:/new/prefix1/img/green_led_.bmp);"));
+    else if (color == Qt::gray)
+        ui->widget->setStyleSheet(QString("image: url(:/new/prefix1/img/gray_led_.bmp);"));
+    else if (color == Qt::red)
+        ui->widget->setStyleSheet(QString("image: url(:/new/prefix1/img/red_led_.bmp);"));
+
+}
+
+void BoardButton::setLedColor_sub1(const Qt::GlobalColor &s1)
+{
+
+}
+
+void BoardButton::setLedColor_sub2(const Qt::GlobalColor &s1)
+{
+
+}
+
+void BoardButton::setLedColor_sub3(const Qt::GlobalColor &s1)
+{
+
+}
+
+void BoardButton::setLedColor_sub4(const Qt::GlobalColor &s1)
+{
+
+}
 void BoardButton::mousePressEvent(QMouseEvent *event)
 {
     this->setFrameShadow(QFrame::Sunken);
