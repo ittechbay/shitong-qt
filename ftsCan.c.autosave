@@ -467,6 +467,7 @@ int fts_can_outfreq_get(unsigned slot, int *_1pps, int *_10M, int *tod)
     }
 }
 
+
 int fts_can_poll(unsigned int slot, unsigned int *board_type, unsigned int *error)
 {
     struct can_frame sendframe, recvframe;

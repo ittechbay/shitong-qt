@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>480</height>
+    <width>842</width>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -150,7 +150,7 @@
       <item>
        <widget class="QLabel" name="label_23">
         <property name="text">
-         <string>GNSSA</string>
+         <string>参考源</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -160,7 +160,7 @@
       <item>
        <widget class="QLabel" name="label_24">
         <property name="text">
-         <string>GNSSB</string>
+         <string>参考源</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -170,7 +170,7 @@
       <item>
        <widget class="QLabel" name="label_25">
         <property name="text">
-         <string>外监</string>
+         <string>参考源</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -200,7 +200,7 @@
       <item>
        <widget class="QLabel" name="label_27">
         <property name="text">
-         <string>时频A</string>
+         <string>时频B</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -285,7 +285,7 @@
       <item>
        <widget class="QLabel" name="label_30">
         <property name="text">
-         <string>电源A</string>
+         <string>电源B</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -461,6 +461,9 @@
       <property name="text">
        <string>报警</string>
       </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
      </widget>
     </item>
    </layout>
@@ -551,7 +554,7 @@
      <rect>
       <x>5</x>
       <y>5</y>
-      <width>236</width>
+      <width>251</width>
       <height>130</height>
      </rect>
     </property>
@@ -702,10 +705,10 @@
   <widget class="StateTable" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>555</x>
-     <y>210</y>
-     <width>242</width>
-     <height>86</height>
+     <x>560</x>
+     <y>180</y>
+     <width>231</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="focusPolicy">
@@ -719,6 +722,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">selection-background-color: rgb(255, 0, 127);
+font: 8pt &quot;Sans Serif&quot;;
 </string>
    </property>
    <property name="verticalScrollBarPolicy">
@@ -746,10 +750,10 @@
     <number>2</number>
    </property>
    <property name="columnCount">
-    <number>4</number>
+    <number>5</number>
    </property>
    <attribute name="horizontalHeaderDefaultSectionSize">
-    <number>60</number>
+    <number>46</number>
    </attribute>
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
@@ -787,6 +791,11 @@
      <string>时差</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>精度</string>
+    </property>
+   </column>
    <item row="0" column="0">
     <property name="text">
      <string>A</string>
@@ -807,6 +816,11 @@
      <string>11</string>
     </property>
    </item>
+   <item row="0" column="4">
+    <property name="text">
+     <string>23</string>
+    </property>
+   </item>
    <item row="1" column="0">
     <property name="text">
      <string>B</string>
@@ -825,6 +839,11 @@
    <item row="1" column="3">
     <property name="text">
      <string>23</string>
+    </property>
+   </item>
+   <item row="1" column="4">
+    <property name="text">
+     <string>30</string>
     </property>
    </item>
   </widget>

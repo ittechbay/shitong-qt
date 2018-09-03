@@ -130,6 +130,7 @@ void BoardButton::setLedColor_sub4(const Qt::GlobalColor &s1)
 {
 
 }
+
 void BoardButton::mousePressEvent(QMouseEvent *event)
 {
     this->setFrameShadow(QFrame::Sunken);

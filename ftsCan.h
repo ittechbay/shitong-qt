@@ -11,6 +11,95 @@ extern "C" {
 
 #endif
 
+#define FTS_SET_CMD_TYPE_SCALAR 1
+#define FTS_SET_CMD_TYPE_TABLE 2
+
+
+
+#define FTS_SET_CMD_SCALAR_CLK_STATE 1
+#define FTS_SET_CMD_SCALAR_CLK_MODE 2
+
+
+#define FTS_SET_SCALAR_FRAME_CLK_STATE 1
+#define FTS_SET_SCALAR_FRAME_CLK_MODE 2
+
+
+#define FTS_SET_CMD_TABLE_REF 1
+#define FTS_SET_CMD_TABLE_NTP 2
+
+//new define
+#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_MODE 0x01
+#define FTS_CAN_FRAME_CMD_CODE_PTP_POLL 0x02
+#define FTS_CAN_FRAME_CMD_CODE_PTP_POLL_REPLY 0x02
+#define FTS_CAN_FRAME_CMD_CODE_PTP_GET_STATE 0x02
+#define FTS_CAN_FRAME_CMD_CODE_PTP_GET_STATE_REPLY 0x02
+#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_PARAM 0x11
+
+#define FTS_CAN_FRAME_PTP_SET_IP_P1 0
+#define FTS_CAN_FRAME_PTP_SET_IP_P2 1
+#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_IP_P1 0
+#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_IP_P2 1
+
+
+#define FTS_CAN_CODE_POLL 0xFF
+#define FTS_CAN_CODE_PWR_GET 0x01
+#define FTS_CAN_CODE_GNSS_GET_STATE 0x01
+#define FTS_CAN_CODE_GNSS_GET_GPS_JWD 0x02
+#define FTS_CAN_CODE_GNSS_GET_BD_JWD 0x03
+#define FTS_CAN_CODE_OUTER_REF_GET 0x01
+
+
+
+#define FTS_CAN_CODE_POWERUP 0x80
+#define FTS_CAN_CODE_GNSSA_POLL 0x02
+#define FTS_CAN_CODE_GNSS_POLL 0x02
+
+#define FTS_CAN_CODE_POWERUP 0x80
+#define FTS_CAN_CODE_GNSSA_POLL 0x02
+#define FTS_CAN_CODE_GNSS_POLL 0x02
+
+#define FTS_CAN_CODE_GNSSB_POLL 0x03
+#define FTS_CAN_CODE_GNSSA_GET_STATE 0x04
+#define FTS_CAN_CODE_PWRA0_GET 0x05
+#define FTS_CAN_CODE_PWRA1_GET 0x06
+#define FTS_CAN_CODE_PWRB0_GET 0x07
+#define FTS_CAN_CODE_PWRB1_GET 0x08
+
+#define FTS_CAN_CODE_BOARD_OK 0x0
+#define FTS_CAN_CODE_BOARD_ERROR 0x1
+#define FTS_CAN_CODE_BOARD_NO_RESPONSE 0x0
+#define FTS_CAN_CODE_BOARD_OK_RESPONSE 0x1
+
+#define FTS_GPS_SELECTED 0
+#define FTS_GPS_UNSELECTED 1
+#define FTS_BD_SELECTED 0
+#define FTS_BD_UNSELECTED 1
+#define FTS_GPS_LOCK 0
+#define FTS_GPS_UNLOCK 1
+#define FTS_BD_LOCK 0
+#define FTS_BD_UNLOCK 1
+
+
+//slot number
+#define FTS_SLOT_NUMBER_M_POWER_1 11
+#define FTS_SLOT_NUMBER_M_POWER_2 10
+
+//board type电源-0、GNSS-1、外参考-2、时频-3、切换-4、分配-5、NTP-6、PTP-7、B-8、10M-9
+#define FTS_BOARD_TYPE_POWER 0
+#define FTS_BOARD_TYPE_GNSS 1
+#define FTS_BOARD_TYPE_OUTER_REF 2
+#define FTS_BOARD_TYPE_TF 3
+#define FTS_BOARD_TYPE_SW 4
+#define FTS_BOARD_TYPE_ALLOC 5
+#define FTS_BOARD_TYPE_NTP 6
+#define FTS_BOARD_TYPE_PTP 7
+#define FTS_BOARD_TYPE_B 8
+#define FTS_BOARD_TYPE_10M 9
+
+
+
+
+
 /* function declarations */
 typedef struct ref_state {
     int selected;
@@ -18,7 +107,7 @@ typedef struct ref_state {
     int timediff;
 } ref_state_t;
 
-
+int fts_can_poll(unsigned int slot, unsigned int *board_type, unsigned int *error);
 int fts_can_gnssA_poll(int *error);
 
 int fts_can_gnss_get_ref_state(struct ref_state *gps_state, struct ref_state *bd_state);
