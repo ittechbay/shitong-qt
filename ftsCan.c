@@ -19,11 +19,6 @@
 #include "ftsCan.h"
 
 
-
-
-
-
-
 int fts_slot_state[3];
 
 void init_ftsCan(void)
@@ -33,44 +28,37 @@ void init_ftsCan(void)
 }
 
 
-
-unsigned int toCanAddress(unsigned int slot, unsigned int board_type)
-{
-
-}
-
-
-
 #define SLOT_COUNT 24
-#define BOARD_TYPE_COUNT 11
+#define BOARD_TYPE_COUNT 10
+//board type电源-0、GNSS-1、外参考-2、时频-3、切换-4、分配-5、NTP-6、PTP-7、B-8、10M-9
 static unsigned int canAddressArray[SLOT_COUNT][BOARD_TYPE_COUNT] = {
     //main box
-    {0,0,0,0,0,0,0,0,0,0,0,0}
-    {1,0,0,0,0,0,0,0,0,0,0,0},
-    {2,3,4,5,0,0,0,0,0,0,0,0},//
-    {6,7,8,9,0,0,0,0,0,0,0,0},//
-    {10,11,12,13,0,0,0,0,0,0,0,0},//
-    {14,15,16,17,0,0,0,0,0,0,0,0},//
-    {18,19,0,0,0,0,0,0,0,0,0,0},
-    {20,21,0,0,0,0,0,0,0,0,0,0},
-    {22,23,0,0,0,0,0,0,0,0,0,0},
-    {24,0,0,0,0,0,0,0,0,0,0,0},//tf
-    {25,0,0,0,0,0,0,0,0,0,0,0},//sw
-    {26,0,0,0,0,0,0,0,0,0,0,0},//tf
+    {0,0,0,0,0,0,0,0,0,0},
+    {1,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,2,3,4,5},//NTP
+    {0,0,0,0,0,0,6,7,8,9},//PTP
+    {0,0,0,0,0,0,10,11,12,13},//B
+    {0,0,0,0,0,0,14,15,16,17},//10
+    {0,18,0,0,0,0,0,0,0,0}, //GNSS
+    {0,19,0,0,0,0,0,0,0,0},//GNSS
+    {0,0,20,0,0,0,0,0,0,0},//outRef
+    {0,0,0,21,0,0,0,0,0,0},//tf
+    {0,0,0,0,22,0,0,0,0,0},//sw
+    {0,0,0,23,0,0,0,0,0,0},//tf
 
     //alloc box
-    {27,0,0,0,0,0,0,0,0,0,0,0},
-    {28,0,0,0,0,0,0,0,0,0,0,0},
-    {29,30,31,32,0,0,0,0,0,0,0,0},
-    {33,34,35,36,0,0,0,0,0,0,0,0},
-    {37,38,39,40,0,0,0,0,0,0,0,0},
-    {41,42,43,44,0,0,0,0,0,0,0,0},
-    {45,46,47,48,0,0,0,0,0,0,0,0},
-    {49,50,51,52,0,0,0,0,0,0,0,0},
-    {53,54,55,56,0,0,0,0,0,0,0,0},
-    {57,58,59,60,0,0,0,0,0,0,0,0},
-    {61,62,63,64,0,0,0,0,0,0,0,0},
-    {65,0,0,0,0,0,0,0,0,0,0,0}
+    {24,0,0,0,0,0,0,0,0,0},//pwr
+    {25,0,0,0,0,0,0,0,0,0},//pwr
+    {0,0,0,0,0,0,26,27,28,29},
+    {0,0,0,0,0,0,30,31,32,33},
+    {0,0,0,0,0,0,34,35,36,37},
+    {0,0,0,0,0,0,38,39,40,41},
+    {0,0,0,0,0,0,42,43,44,45},
+    {0,0,0,0,0,0,46,47,48,49},
+    {0,0,0,0,0,0,50,51,52,53},
+    {0,0,0,0,0,0,54,55,56,57},
+    {0,0,0,0,0,0,58,59,60,61},
+    {0,0,0,0,0,62,0,0,0,0}// alloc
 };
 #define CAN_ID_COUNT 100
 unsigned int canidToSlotAndBoardtype[CAN_ID_COUNT][2] = {
@@ -95,7 +83,7 @@ unsigned int canidToSlotAndBoardtype[CAN_ID_COUNT][2] = {
     {22,FTS_BOARD_TYPE_NTP},    {22,FTS_BOARD_TYPE_PTP},    {22,FTS_BOARD_TYPE_B},    {22,FTS_BOARD_TYPE_10M},
 
     {23,FTS_BOARD_TYPE_ALLOC}
-}
+};
 #define FTS_CAN_FRAME_ID_BYTE 0x18          //CAN protocal type byte
 #define FTS_CAN_FRAME_MON_ADDR_BYTE 0xFE    //CAN protocal type byte
 //#define FTS_CAN_FRAME_BROARDCAST_ADDR ((FTS_CAN_FRAME_ID_BYTE<<24)|(0xFF<<16)|(FTS_CAN_FRAME_MON_ADDR_BYTE<<8)) //
@@ -103,7 +91,6 @@ unsigned int canidToSlotAndBoardtype[CAN_ID_COUNT][2] = {
 unsigned int fts_can_mk_send_id(unsigned int slot, unsigned int board_type)
 {
     unsigned int id, byte0, byte1, byte2, byte3;
-
 
     byte0 = 0;
     byte1 = FTS_CAN_FRAME_MON_ADDR_BYTE; //Monitor board CAN address is 0xFE
@@ -113,7 +100,7 @@ unsigned int fts_can_mk_send_id(unsigned int slot, unsigned int board_type)
     id = (byte3<<24)|(byte2<<16)|(byte1<<8)|byte0;
     id = id|CAN_EFF_FLAG;
 
-    return id;fgg
+    return id;
 }
 
 unsigned int fts_can_mk_broadcast_send_id()
@@ -139,7 +126,6 @@ int fts_can_id_to_board_type(int canid)
 {
     int tmp = canid&0xf;
     return tmp;
-
 }
 
 int fts_can_send(struct can_frame *send_frame)
@@ -150,7 +136,7 @@ int fts_can_send(struct can_frame *send_frame)
     int ret;
     int recv_own_msgs = 0; //set loop back:  1 enable 0 disable
 
-#if 1//zbl test
+#if 0//zbl test
     return 1;
 #endif
     sock = socket(PF_CAN, SOCK_RAW, CAN_RAW);
@@ -231,7 +217,7 @@ int fts_can_send_and_recv(struct can_frame *send_frame, struct can_frame *recv_f
 		close(sock);
         exit(1);
 	}
-
+    //todo: set receive filter, only receive dest can addr
 	ret = write(sock, (void *)send_frame, sizeof(struct can_frame));
 	///////////////////////
 	
@@ -260,11 +246,10 @@ int fts_can_send_and_recv(struct can_frame *send_frame, struct can_frame *recv_f
 int fts_can_broardcast_poll()
 {
     struct can_frame sendframe;
-    int test_size = sizeof (struct in_addr);  //test size
-    int canid;
+    //int test_size = sizeof (struct in_addr);  //test size
     int ret;
 
-    sendframe.can_id = FTS_CAN_FRAME_BROARDCAST_ADDR;
+    sendframe.can_id = fts_can_mk_broadcast_send_id();
     sendframe.can_dlc = 1;
     sendframe.data[0] = FTS_CAN_CODE_POLL;
 
@@ -275,7 +260,6 @@ int fts_can_broardcast_poll()
 int fts_can_poll(unsigned slot, unsigned boardtype, int *error)
 {
     struct can_frame sendframe, recvframe;
-    int canid;
     int ret;
 
     sendframe.can_id = fts_can_mk_send_id(slot, boardtype);
@@ -285,18 +269,21 @@ int fts_can_poll(unsigned slot, unsigned boardtype, int *error)
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
 
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
-         *current = recvframe.data[1];
-        return FTS_CAN_CODE_BOARD_OK_RESPONSE;
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
     }
+
+    *error = recvframe.data[3];
+    return FTS_CAN_OK_RESPONSE;
+
 }
 
 int fts_can_pwr_get_current(unsigned slot, int *current)
 {
     struct can_frame sendframe, recvframe;
-    int canid;
     int ret;
 
     sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_POWER);
@@ -306,12 +293,16 @@ int fts_can_pwr_get_current(unsigned slot, int *current)
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
 
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
-         *current = recvframe.data[1];
-        return FTS_CAN_CODE_BOARD_OK_RESPONSE;
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
     }
+
+    *current = recvframe.data[1];
+     return FTS_CAN_OK_RESPONSE;
+
 }
 
 struct fts_ref_state { //[锁定|选中] [收星数高位][收星数低位]
@@ -328,7 +319,6 @@ int satCnt;
 int fts_can_gnss_get_state(unsigned slot, struct fts_ref_state *gps_state, struct fts_ref_state *bd_state)
 {
     struct can_frame sendframe, recvframe;
-    int canid;
     int ret;
 
     sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_GNSS);
@@ -338,9 +328,13 @@ int fts_can_gnss_get_state(unsigned slot, struct fts_ref_state *gps_state, struc
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
 
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
         int data_h, data_l;
 
         gps_state->selected = recvframe.data[1]&FTS_CAN_GNSS_SELECT_MASK;
@@ -355,8 +349,8 @@ int fts_can_gnss_get_state(unsigned slot, struct fts_ref_state *gps_state, struc
         data_l = recvframe.data[6];
         bd_state->satCnt = (data_h<<8)|data_l;
 
-        return FTS_CAN_CODE_BOARD_OK_RESPONSE;
-    }
+        return FTS_CAN_OK_RESPONSE;
+
 }
 
 struct fts_jwd {
@@ -371,9 +365,8 @@ int wd_miao;
 int fts_can_gnss_get_gps_jwd(unsigned slot, struct fts_jwd *gps_jwd)
 {
     struct can_frame sendframe, recvframe;
-    int canid;
     int ret;
-
+    int sign_jd, sign_wd; //jing
     sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_GNSS);
     sendframe.can_dlc = 1;
     sendframe.data[0] = FTS_CAN_CODE_GNSS_GET_GPS_JWD;
@@ -381,32 +374,35 @@ int fts_can_gnss_get_gps_jwd(unsigned slot, struct fts_jwd *gps_jwd)
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
 
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
-        int sign_jd, sign_wd; //jing
-        sign_jd = recvframe.data[1]&FTS_CAN_GNSS_JD_SIGN_MASK;
-        gps_jwd->jd = recvframe.data[2];
-        if (sign_jd != 0)
-            gps_jwd->jd *= -1;
-        gps_jwd->jd_fen = recvframe.data[3];
-        gps_jwd->jd_miao = recvframe.data[4];
-
-        gps_jwd->wd = recvframe.data[5];
-        if (sign_wd != 0)
-            gps_jwd->jd *= -1;
-        gps_jwd->wd_fen = recvframe.data[6];
-        gps_jwd->wd_miao = recvframe.data[7];
-        return FTS_CAN_CODE_BOARD_OK_RESPONSE;
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
     }
+
+
+    sign_jd = recvframe.data[1]&FTS_CAN_GNSS_JD_SIGN_MASK;
+    gps_jwd->jd = recvframe.data[2];
+    if (sign_jd != 0)
+        gps_jwd->jd *= -1;
+    gps_jwd->jd_fen = recvframe.data[3];
+    gps_jwd->jd_miao = recvframe.data[4];
+
+    gps_jwd->wd = recvframe.data[5];
+    if (sign_wd != 0)
+        gps_jwd->jd *= -1;
+    gps_jwd->wd_fen = recvframe.data[6];
+    gps_jwd->wd_miao = recvframe.data[7];
+    return FTS_CAN_OK_RESPONSE;
+
 }
 
 int fts_can_gnss_get_bd_jwd(unsigned slot, struct fts_jwd *bd_jwd)
 {
     struct can_frame sendframe, recvframe;
-    int canid;
     int ret;
-
+    int sign_jd, sign_wd; //jing
     sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_GNSS);
     sendframe.can_dlc = 1;
     sendframe.data[0] = FTS_CAN_CODE_GNSS_GET_BD_JWD;
@@ -414,10 +410,14 @@ int fts_can_gnss_get_bd_jwd(unsigned slot, struct fts_jwd *bd_jwd)
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
 
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
-        int sign_jd, sign_wd; //jing
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+
         sign_jd = recvframe.data[1]&FTS_CAN_GNSS_JD_SIGN_MASK;
         bd_jwd->jd = recvframe.data[2];
         if (sign_jd != 0)
@@ -430,14 +430,17 @@ int fts_can_gnss_get_bd_jwd(unsigned slot, struct fts_jwd *bd_jwd)
             bd_jwd->jd *= -1;
         bd_jwd->wd_fen = recvframe.data[6];
         bd_jwd->wd_miao = recvframe.data[7];
-        return FTS_CAN_CODE_BOARD_OK_RESPONSE;
-    }
+        return FTS_CAN_OK_RESPONSE;
+
 }
+
 //1PPS 10M TOD
+#define FTS_CAN_CODE_1PPS_SEL_MASK 0x00000001
+#define FTS_CAN_CODE_10M_SEL_MASK 0x00000002
+#define FTS_CAN_CODE_TOD_SEL_MASK 0x00000004
 int fts_can_outfreq_get(unsigned slot, int *_1pps, int *_10M, int *tod)
 {
     struct can_frame sendframe, recvframe;
-    int canid;
     int ret;
 
     sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_OUTER_REF);
@@ -447,47 +450,419 @@ int fts_can_outfreq_get(unsigned slot, int *_1pps, int *_10M, int *tod)
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
 
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
-        int sign_jd, sign_wd; //jing
-        sign_jd = recvframe.data[1]&FTS_CAN_GNSS_JD_SIGN_MASK;
-        bd_jwd->jd = recvframe.data[2];
-        if (sign_jd != 0)
-            bd_jwd->jd *= -1;
-        bd_jwd->jd_fen = recvframe.data[3];
-        bd_jwd->jd_miao = recvframe.data[4];
-
-        bd_jwd->wd = recvframe.data[5];
-        if (sign_wd != 0)
-            bd_jwd->jd *= -1;
-        bd_jwd->wd_fen = recvframe.data[6];
-        bd_jwd->wd_miao = recvframe.data[7];
-        return FTS_CAN_CODE_BOARD_OK_RESPONSE;
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
     }
+
+        *_1pps = (recvframe.data[1]&FTS_CAN_CODE_1PPS_SEL_MASK);
+        *_10M = (recvframe.data[1]&FTS_CAN_CODE_10M_SEL_MASK)>>1;
+        *tod = (recvframe.data[1]&FTS_CAN_CODE_TOD_SEL_MASK)>>2;
+
+        return FTS_CAN_OK_RESPONSE;
+
 }
 
-int fts_can_poll(unsigned int slot, unsigned int *board_type, unsigned int *error)
+int fts_can_tf_get_date(unsigned slot, int *year, int *month, int *day)
 {
     struct can_frame sendframe, recvframe;
-    unsigned int canid;
     int ret;
+    int data_h, data_l;
 
-    sendframe.can_id = fts_can_mk_broadcast_send_id();
-    sendframe.can_dlc = 1;
-    sendframe.data[0] = FTS_CAN_CODE_POLL;
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 5;
+    sendframe.data[0] = FTS_CAN_CODE_TF_GET_DATE;
 
     ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
     if (ret != 0)
-        return FTS_CAN_CODE_BOARD_NO_RESPONSE;
-    else
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
     {
-       *board_type = recvframe.data[2];
-       *error = recvframe.data[3];
-       return FTS_CAN_CODE_BOARD_OK_RESPONSE;
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
     }
+
+
+    data_h = recvframe.data[1];
+    data_l = recvframe.data[2];
+    *year = (recvframe.data[1]<<8)|recvframe.data[2];
+    *month = recvframe.data[3];
+    *day = recvframe.data[4];
+
+    return FTS_CAN_OK_RESPONSE;
+
 }
 
+int fts_can_tf_get_time(unsigned slot, int *hour, int *minute, int *second)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 4;
+    sendframe.data[0] = FTS_CAN_CODE_TF_GET_TIME;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+        *hour = recvframe.data[1];
+        *minute = recvframe.data[2];
+        *second = recvframe.data[3];
+
+        return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_get_time_zone(unsigned slot, int *tz_index)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_GET_TIME_ZONE;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+     *tz_index = recvframe.data[1];
+
+     return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_set_date(unsigned slot, int year, int month, int day)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_SET_DATE;
+    sendframe.data[1] = year>>8;
+    sendframe.data[2] = year&0xFF;
+    sendframe.data[3] = month;
+    sendframe.data[4] = day;
+
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+    return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_set_time(unsigned slot, int hour, int minute, int second)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_SET_TIME;
+    sendframe.data[1] = hour;
+    sendframe.data[2] = minute;
+    sendframe.data[3] = second;
+
+
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+    return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_set_time_zone(unsigned slot, int tz_index)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_SET_TIME_ZONE;
+    sendframe.data[1] = tz_index;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+         return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_cmd_add_second(unsigned slot)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_CMD_ADD_SECOND;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+         return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_cmd_subtract_second(unsigned slot)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_CMD_SUBTRACT_SECOND;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+         return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_cmd_forword(unsigned slot)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_CMD_FORWORD;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+         return FTS_CAN_OK_RESPONSE;
+}
+
+int fts_can_tf_cmd_backword(unsigned slot)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_CMD_BACKWORD;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+     return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_cmd_syn(unsigned slot)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_CMD_SYN;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+    return FTS_CAN_OK_RESPONSE;
+
+}
+
+int fts_can_tf_cmd_get_run_mode(unsigned slot, int *mode, int *sel)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_GET_RUN_MODE;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+    *mode = recvframe.data[1];
+
+    if (*mode == FTS_CAN_CODE_TF_RUN_MODE_MANUAL)
+        *sel = recvframe.data[2];
+
+    return FTS_CAN_OK_RESPONSE;
+}
+
+
+int fts_can_tf_cmd_set_run_mode(unsigned slot, int mode, int sel)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 2;
+    sendframe.data[0] = FTS_CAN_CODE_TF_SET_RUN_MODE;
+    sendframe.data[1] = mode;
+    sendframe.data[2] = sel;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+    return FTS_CAN_OK_RESPONSE;
+}
+
+int fts_can_tf_cmd_get_time_diff(unsigned slot, int *time)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_GET_TIME_DIFF;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+
+    int data_h, data_l;
+
+    data_h = recvframe.data[1];
+    data_l = recvframe.data[2];
+    *time = (data_h<<8)|data_l;
+
+
+    return FTS_CAN_OK_RESPONSE;
+
+}
+
+
+int fts_can_tf_cmd_get_acc(unsigned slot, int *acc)
+{
+    struct can_frame sendframe, recvframe;
+    int ret;
+
+    sendframe.can_id = fts_can_mk_send_id(slot, FTS_BOARD_TYPE_TF);
+    sendframe.can_dlc = 1;
+    sendframe.data[0] = FTS_CAN_CODE_TF_GET_ACC;
+
+    ret = fts_can_send_and_recv(&sendframe, &recvframe);
+
+    if (ret != 0)
+        return FTS_CAN_NO_RESPONSE;
+    else if (recvframe.data[0] == FTS_CAN_CODE_RESPONSE)
+    {
+        if (recvframe.data[1] == FTS_CAN_CODE_RESPONSE_ERROR)
+            return FTS_CAN_ERROR_RESPONSE;
+    }
+    int data_h, data_l;
+
+    data_h = recvframe.data[1];
+    data_l = recvframe.data[2];
+    *acc = (data_h<<8)|data_l;
+
+
+    return FTS_CAN_OK_RESPONSE;
+
+}
 
 
 

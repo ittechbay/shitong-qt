@@ -11,64 +11,63 @@ extern "C" {
 
 #endif
 
+/*
 #define FTS_SET_CMD_TYPE_SCALAR 1
 #define FTS_SET_CMD_TYPE_TABLE 2
-
-
 
 #define FTS_SET_CMD_SCALAR_CLK_STATE 1
 #define FTS_SET_CMD_SCALAR_CLK_MODE 2
 
-
 #define FTS_SET_SCALAR_FRAME_CLK_STATE 1
 #define FTS_SET_SCALAR_FRAME_CLK_MODE 2
 
-
 #define FTS_SET_CMD_TABLE_REF 1
 #define FTS_SET_CMD_TABLE_NTP 2
+*/
 
 //new define
-#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_MODE 0x01
-#define FTS_CAN_FRAME_CMD_CODE_PTP_POLL 0x02
-#define FTS_CAN_FRAME_CMD_CODE_PTP_POLL_REPLY 0x02
-#define FTS_CAN_FRAME_CMD_CODE_PTP_GET_STATE 0x02
-#define FTS_CAN_FRAME_CMD_CODE_PTP_GET_STATE_REPLY 0x02
-#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_PARAM 0x11
-
-#define FTS_CAN_FRAME_PTP_SET_IP_P1 0
-#define FTS_CAN_FRAME_PTP_SET_IP_P2 1
-#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_IP_P1 0
-#define FTS_CAN_FRAME_CMD_CODE_PTP_SET_IP_P2 1
-
-
 #define FTS_CAN_CODE_POLL 0xFF
 #define FTS_CAN_CODE_PWR_GET 0x01
 #define FTS_CAN_CODE_GNSS_GET_STATE 0x01
 #define FTS_CAN_CODE_GNSS_GET_GPS_JWD 0x02
 #define FTS_CAN_CODE_GNSS_GET_BD_JWD 0x03
 #define FTS_CAN_CODE_OUTER_REF_GET 0x01
+#define FTS_CAN_CODE_TF_GET_DATE 0x01
+#define FTS_CAN_CODE_TF_GET_TIME 0x02
+#define FTS_CAN_CODE_TF_GET_TIME_ZONE 0x03
+#define FTS_CAN_CODE_TF_SET_DATE 0x04
+#define FTS_CAN_CODE_TF_SET_TIME 0x05
+#define FTS_CAN_CODE_TF_SET_TIME_ZONE 0x06
+#define FTS_CAN_CODE_TF_CMD_ADD_SECOND 0x07
+#define FTS_CAN_CODE_TF_CMD_SUBTRACT_SECOND 0x08
+#define FTS_CAN_CODE_TF_CMD_FORWORD 0x09
+#define FTS_CAN_CODE_TF_CMD_BACKWORD 0x0A
+#define FTS_CAN_CODE_TF_CMD_SYN 0x0D
+#define FTS_CAN_CODE_TF_GET_RUN_MODE 0x10
+#define FTS_CAN_CODE_TF_RUN_MODE_AUTO 0x0
+#define FTS_CAN_CODE_TF_RUN_MODE_MANUAL 0x01
+#define FTS_CAN_CODE_TF_SOURCE_A 0x0
+#define FTS_CAN_CODE_TF_SOURCE_B 0x01
+#define FTS_CAN_CODE_TF_SET_RUN_MODE 0x11
+#define FTS_CAN_CODE_TF_GET_TIME_DIFF 0x13
+#define FTS_CAN_CODE_TF_GET_ACC 0x14 //Accuracy
+
+#define FTS_CAN_CODE_RESPONSE_OK 0x0
+#define FTS_CAN_CODE_RESPONSE_ERROR 0x01
+#define FTS_CAN_CODE_RESPONSE 0x40
+
+#define FTS_CAN_CODE_SET_OK 0x0  //obselete
+#define FTS_CAN_CODE_SET_ERROR 0x1 //obselete
+#define FTS_CAN_CODE_OK 0x0
+#define FTS_CAN_CODE_ERROR 0x1
+
+#define FTS_CAN_NO_RESPONSE 0x0
+#define FTS_CAN_OK_RESPONSE 0x1
+#define FTS_CAN_ERROR_RESPONSE 0x2
 
 
 
-#define FTS_CAN_CODE_POWERUP 0x80
-#define FTS_CAN_CODE_GNSSA_POLL 0x02
-#define FTS_CAN_CODE_GNSS_POLL 0x02
 
-#define FTS_CAN_CODE_POWERUP 0x80
-#define FTS_CAN_CODE_GNSSA_POLL 0x02
-#define FTS_CAN_CODE_GNSS_POLL 0x02
-
-#define FTS_CAN_CODE_GNSSB_POLL 0x03
-#define FTS_CAN_CODE_GNSSA_GET_STATE 0x04
-#define FTS_CAN_CODE_PWRA0_GET 0x05
-#define FTS_CAN_CODE_PWRA1_GET 0x06
-#define FTS_CAN_CODE_PWRB0_GET 0x07
-#define FTS_CAN_CODE_PWRB1_GET 0x08
-
-#define FTS_CAN_CODE_BOARD_OK 0x0
-#define FTS_CAN_CODE_BOARD_ERROR 0x1
-#define FTS_CAN_CODE_BOARD_NO_RESPONSE 0x0
-#define FTS_CAN_CODE_BOARD_OK_RESPONSE 0x1
 
 #define FTS_GPS_SELECTED 0
 #define FTS_GPS_UNSELECTED 1
@@ -79,10 +78,6 @@ extern "C" {
 #define FTS_BD_LOCK 0
 #define FTS_BD_UNLOCK 1
 
-
-//slot number
-#define FTS_SLOT_NUMBER_M_POWER_1 11
-#define FTS_SLOT_NUMBER_M_POWER_2 10
 
 //board type电源-0、GNSS-1、外参考-2、时频-3、切换-4、分配-5、NTP-6、PTP-7、B-8、10M-9
 #define FTS_BOARD_TYPE_POWER 0
@@ -100,17 +95,18 @@ extern "C" {
 
 
 
-/* function declarations */
+/* function declarations
 typedef struct ref_state {
     int selected;
     int locked;
     int timediff;
-} ref_state_t;
+} ref_state_t;*/
 
-int fts_can_poll(unsigned int slot, unsigned int *board_type, unsigned int *error);
-int fts_can_gnssA_poll(int *error);
 
-int fts_can_gnss_get_ref_state(struct ref_state *gps_state, struct ref_state *bd_state);
+
+
+
+int fts_can_poll(unsigned slot, unsigned boardtype, int *error);
 
 #ifdef __cplusplus
 

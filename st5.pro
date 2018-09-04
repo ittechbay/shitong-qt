@@ -7,8 +7,6 @@ TEMPLATE = app
 
 SOURCES += \
     boardbutton.cpp \
-    clock.cpp \
-    ctrbuttonform.cpp \
     main.cpp \
     mainpanel.cpp \
     setalarm.cpp \
@@ -23,8 +21,6 @@ SOURCES += \
 
 HEADERS += \
     boardbutton.h \
-    clock.h \
-    ctrbuttonform.h \
     ftsCan.h \
     ftsSetDo.h \
     mainpanel.h \
@@ -39,15 +35,13 @@ HEADERS += \
 
 FORMS += \
     boardbutton.ui \
-    frame.ui \
     mainpanel.ui \
     setalarm.ui \
     setdate.ui \
     setdatetime.ui \
     setntp.ui \
     setptp.ui \
-    settime.ui \
-    widget.ui
+    settime.ui
 
 RESOURCES += \
     res.qrc

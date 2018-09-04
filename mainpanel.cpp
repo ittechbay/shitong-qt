@@ -1,4 +1,8 @@
 //主控界面
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "mainpanel.h"
 #include "ui_mainpanel.h"
@@ -12,32 +16,40 @@
 #include <linux/can.h>
 #include <QDebug>
 
+#include <sys/ioctl.h>
+#include <net/if.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+
+
 mainPanel::mainPanel(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainPanel)
 {
     ui->setupUi(this);
-    ui->frame->setBoard();
-    ui->frame_2->setBoard();
+    ui->frame_0->setBoard();
+    ui->frame_1->setBoard();
+    ui->frame_2->setNullBoard();
     ui->frame_3->setNullBoard();
     ui->frame_4->setNullBoard();
     ui->frame_5->setNullBoard();
-    ui->frame_6->setNullBoard();
+    ui->frame_6->setBoard();
     ui->frame_7->setBoard();
     ui->frame_8->setBoard();
-    ui->frame_9->setBoard();
-    ui->frame_10->setBoard(QApplication::translate("BoardButton", "10M", 0),
+    ui->frame_9->setBoard(QApplication::translate("BoardButton", "10M", 0),
                            QApplication::translate("BoardButton", "1pps", 0),
                            QApplication::translate("BoardButton", "TOD", 0),
                            QApplication::translate("BoardButton", "B", 0));
-    ui->frame_11->setBoard(QApplication::translate("BoardButton", "10M", 0),
+    ui->frame_10->setBoard(QApplication::translate("BoardButton", "10M", 0),
                            QApplication::translate("BoardButton", "1pps", 0));
-    ui->frame_12->setBoard(QApplication::translate("BoardButton", "10M", 0),
+    ui->frame_11->setBoard(QApplication::translate("BoardButton", "10M", 0),
                            QApplication::translate("BoardButton", "1pps", 0),
                            QApplication::translate("BoardButton", "TOD", 0),
                            QApplication::translate("BoardButton", "B", 0));
 
-    ui->frame_13->setNullBoard();
+    ui->frame_12->setBoard();
+    ui->frame_13->setBoard();
     ui->frame_14->setNullBoard();
     ui->frame_15->setNullBoard();
     ui->frame_16->setNullBoard();
@@ -47,12 +59,7 @@ mainPanel::mainPanel(QWidget *parent) :
     ui->frame_20->setNullBoard();
     ui->frame_21->setNullBoard();
     ui->frame_22->setNullBoard();
-    ui->frame_23->setNullBoard();
-
-    ui->frame_24->setNullBoard();
-
-
-
+    ui->frame_23->setBoard();
 
     ui->tableWidget->setStyleSheet("QTableView {selection-background-color: red;}");
     ui->tableWidget->setStyleSheet("QTableWidget {selection-background-color: red;font: 8pt \"Sans Serif\";selection-color: green;}");
@@ -142,19 +149,18 @@ void mainPanel::onTimerOut0()
     static int a = 0;
     a++;
     unsigned int error;
-    unsigned int board_type;
     int ret;
-    ret = fts_can_poll(0, &board_type, &error);
-    if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
+    ret = fts_can_poll(0, FTS_BOARD_TYPE_POWER, &error);
+    if (ret == FTS_CAN_NO_RESPONSE)
     {
         qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
     }
     else
     {
-        if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame->setLedColor(Qt::green);
+        if (error == FTS_CAN_CODE_OK)
+            ui->frame_0->setLedColor(Qt::green);
         else
-            ui->frame->setLedColor(Qt::red);
+            ui->frame_0->setLedColor(Qt::red);
     }
 }
 
@@ -165,17 +171,17 @@ void mainPanel::onTimerOut1()
     unsigned int error;
     unsigned int board_type;
     int ret;
-    ret = fts_can_poll(1, &board_type, &error);
+    ret = fts_can_poll(1, FTS_BOARD_TYPE_POWER, &error);
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
     }
     else
     {
-        if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_2->setLedColor(Qt::green);
+        if (error == FTS_CAN_CODE_OK)
+            ui->frame_1->setLedColor(Qt::green);
         else
-            ui->frame_2->setLedColor(Qt::red);
+            ui->frame_1->setLedColor(Qt::red);
     }
 }
 
@@ -186,46 +192,47 @@ void mainPanel::onTimerOut2()
     unsigned int error;
     unsigned int board_type;
     int ret;
+
     ret = fts_can_poll(2, &board_type, &error);
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_3->setNullBoard();
-        ui->label_9->setText(QApplication::translate("mainPanel", "输出", 0));
+        ui->frame_2->setNullBoard();
+        ui->label_2->setText(QApplication::translate("mainPanel", "输出", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_B:
-            ui->frame_3->setBoard(QApplication::translate("BoardButton", "10M", 0),
+            ui->frame_2->setBoard(QApplication::translate("BoardButton", "10M", 0),
                               QApplication::translate("BoardButton", "1pps", 0),
                               QApplication::translate("BoardButton", "B-AC", 0),
                               QApplication::translate("BoardButton", "B-DC", 0));
-            ui->label_9->setText(QApplication::translate("mainPanel", "B", 0));
+            ui->label_2->setText(QApplication::translate("mainPanel", "B", 0));
             break;
         case FTS_BOARD_TYPE_10M:
-            ui->frame_3->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
+            ui->frame_2->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
                               QApplication::translate("BoardButton", "10M-2", 0),
                               QApplication::translate("BoardButton", "10M-3", 0));
-            ui->label_9->setText(QApplication::translate("mainPanel", "10M", 0));
+            ui->label_2->setText(QApplication::translate("mainPanel", "10M", 0));
             break;
         case FTS_BOARD_TYPE_NTP:
-            ui->frame_3->setBoard();
-            ui->label_9->setText(QApplication::translate("mainPanel", "NTP", 0));
+            ui->frame_2->setBoard();
+            ui->label_2->setText(QApplication::translate("mainPanel", "NTP", 0));
             break;
         case FTS_BOARD_TYPE_PTP:
-            ui->frame_3->setBoard();
-            ui->label_9->setText(QApplication::translate("mainPanel", "PTP", 0));
+            ui->frame_2->setBoard();
+            ui->label_2->setText(QApplication::translate("mainPanel", "PTP", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_3->setLedColor(Qt::green);
+            ui->frame_2->setLedColor(Qt::green);
         else
-            ui->frame_3->setLedColor(Qt::red);
+            ui->frame_2->setLedColor(Qt::red);
     }
 }
 
@@ -240,42 +247,42 @@ void mainPanel::onTimerOut3()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_4->setNullBoard();
-        ui->label_20->setText(QApplication::translate("mainPanel", "输出", 0));
+        ui->frame_3->setNullBoard();
+        ui->label_3->setText(QApplication::translate("mainPanel", "输出", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_B:
-            ui->frame_4->setBoard(QApplication::translate("BoardButton", "10M", 0),
+            ui->frame_3->setBoard(QApplication::translate("BoardButton", "10M", 0),
                               QApplication::translate("BoardButton", "1pps", 0),
                               QApplication::translate("BoardButton", "B-AC", 0),
                               QApplication::translate("BoardButton", "B-DC", 0));
-            ui->label_20->setText(QApplication::translate("mainPanel", "B", 0));
+            ui->label_3->setText(QApplication::translate("mainPanel", "B", 0));
             break;
         case FTS_BOARD_TYPE_10M:
-            ui->frame_4->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
+            ui->frame_3->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
                               QApplication::translate("BoardButton", "10M-2", 0),
                               QApplication::translate("BoardButton", "10M-3", 0));
-            ui->label_20->setText(QApplication::translate("mainPanel", "10M", 0));
+            ui->label_3->setText(QApplication::translate("mainPanel", "10M", 0));
             break;
         case FTS_BOARD_TYPE_NTP:
-            ui->frame_4->setBoard();
-            ui->label_20->setText(QApplication::translate("mainPanel", "NTP", 0));
+            ui->frame_3->setBoard();
+            ui->label_3->setText(QApplication::translate("mainPanel", "NTP", 0));
             break;
         case FTS_BOARD_TYPE_PTP:
-            ui->frame_4->setBoard();
-            ui->label_20->setText(QApplication::translate("mainPanel", "PTP", 0));
+            ui->frame_3->setBoard();
+            ui->label_3->setText(QApplication::translate("mainPanel", "PTP", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_4->setLedColor(Qt::green);
+            ui->frame_3->setLedColor(Qt::green);
         else
-            ui->frame_4->setLedColor(Qt::red);
+            ui->frame_3->setLedColor(Qt::red);
     }
 }
 
@@ -290,42 +297,42 @@ void mainPanel::onTimerOut4()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_5->setNullBoard();
-        ui->label_21->setText(QApplication::translate("mainPanel", "输出", 0));
+        ui->frame_4->setNullBoard();
+        ui->label_4->setText(QApplication::translate("mainPanel", "输出", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_B:
-            ui->frame_5->setBoard(QApplication::translate("BoardButton", "10M", 0),
+            ui->frame_4->setBoard(QApplication::translate("BoardButton", "10M", 0),
                               QApplication::translate("BoardButton", "1pps", 0),
                               QApplication::translate("BoardButton", "B-AC", 0),
                               QApplication::translate("BoardButton", "B-DC", 0));
-            ui->label_21->setText(QApplication::translate("mainPanel", "B", 0));
+            ui->label_4->setText(QApplication::translate("mainPanel", "B", 0));
             break;
         case FTS_BOARD_TYPE_10M:
-            ui->frame_5->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
+            ui->frame_4->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
                               QApplication::translate("BoardButton", "10M-2", 0),
                               QApplication::translate("BoardButton", "10M-3", 0));
-            ui->label_21->setText(QApplication::translate("mainPanel", "10M", 0));
+            ui->label_4->setText(QApplication::translate("mainPanel", "10M", 0));
             break;
         case FTS_BOARD_TYPE_NTP:
-            ui->frame_5->setBoard();
-            ui->label_21->setText(QApplication::translate("mainPanel", "PTP", 0));
+            ui->frame_4->setBoard();
+            ui->label_4->setText(QApplication::translate("mainPanel", "PTP", 0));
             break;
         case FTS_BOARD_TYPE_PTP:
-            ui->frame_5->setBoard();
-            ui->label_21->setText(QApplication::translate("mainPanel", "PTP", 0));
+            ui->frame_4->setBoard();
+            ui->label_4->setText(QApplication::translate("mainPanel", "PTP", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_5->setLedColor(Qt::green);
+            ui->frame_4->setLedColor(Qt::green);
         else
-            ui->frame_5->setLedColor(Qt::red);
+            ui->frame_4->setLedColor(Qt::red);
     }
 }
 
@@ -340,42 +347,42 @@ void mainPanel::onTimerOut5()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_6->setNullBoard();
-        ui->label_22->setText(QApplication::translate("mainPanel", "输出", 0));
+        ui->frame_5->setNullBoard();
+        ui->label_5->setText(QApplication::translate("mainPanel", "输出", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_B:
-            ui->frame_6->setBoard(QApplication::translate("BoardButton", "10M", 0),
+            ui->frame_5->setBoard(QApplication::translate("BoardButton", "10M", 0),
                               QApplication::translate("BoardButton", "1pps", 0),
                               QApplication::translate("BoardButton", "B-AC", 0),
                               QApplication::translate("BoardButton", "B-DC", 0));
-            ui->label_22->setText(QApplication::translate("mainPanel", "B", 0));
+            ui->label_5->setText(QApplication::translate("mainPanel", "B", 0));
             break;
         case FTS_BOARD_TYPE_10M:
-            ui->frame_6->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
+            ui->frame_5->setBoard(QApplication::translate("BoardButton", "10M-1", 0),
                               QApplication::translate("BoardButton", "10M-2", 0),
                               QApplication::translate("BoardButton", "10M-3", 0));
-            ui->label_22->setText(QApplication::translate("mainPanel", "10M", 0));
+            ui->label_5->setText(QApplication::translate("mainPanel", "10M", 0));
             break;
         case FTS_BOARD_TYPE_NTP:
-            ui->frame_6->setBoard();
-            ui->label_22->setText(QApplication::translate("mainPanel", "NTP", 0));
+            ui->frame_5->setBoard();
+            ui->label_5->setText(QApplication::translate("mainPanel", "NTP", 0));
             break;
         case FTS_BOARD_TYPE_PTP:
-            ui->frame_6->setBoard();
-            ui->label_22->setText(QApplication::translate("mainPanel", "PTP", 0));
+            ui->frame_5->setBoard();
+            ui->label_5->setText(QApplication::translate("mainPanel", "PTP", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_6->setLedColor(Qt::green);
+            ui->frame_5->setLedColor(Qt::green);
         else
-            ui->frame_6->setLedColor(Qt::red);
+            ui->frame_5->setLedColor(Qt::red);
     }
 }
 
@@ -390,29 +397,29 @@ void mainPanel::onTimerOut6()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_7->setNullBoard();
-        ui->label_23->setText(QApplication::translate("mainPanel", "参考源", 0));
+        ui->frame_6->setNullBoard();
+        ui->label_6->setText(QApplication::translate("mainPanel", "参考源", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_GNSS:
-            ui->frame_7->setBoard();
-            ui->label_23->setText(QApplication::translate("mainPanel", "GNSS", 0));
+            ui->frame_6->setBoard();
+            ui->label_6->setText(QApplication::translate("mainPanel", "GNSS", 0));
             break;
         case FTS_BOARD_TYPE_OUTER_REF:
-            ui->frame_7->setBoard();
-            ui->label_23->setText(QApplication::translate("mainPanel", "外参考", 0));
+            ui->frame_6->setBoard();
+            ui->label_6->setText(QApplication::translate("mainPanel", "外参考", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_7->setLedColor(Qt::green);
+            ui->frame_6->setLedColor(Qt::green);
         else
-            ui->frame_7->setLedColor(Qt::red);
+            ui->frame_6->setLedColor(Qt::red);
     }
 }
 
@@ -427,30 +434,30 @@ void mainPanel::onTimerOut7()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_8->setNullBoard();
-        ui->label_24->setText(QApplication::translate("mainPanel", "参考源", 0));
+        ui->frame_7->setNullBoard();
+        ui->label_7->setText(QApplication::translate("mainPanel", "参考源", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_GNSS:
-            ui->frame_8->setBoard();
-            ui->label_24->setText(QApplication::translate("mainPanel", "GNSS", 0));
+            ui->frame_7->setBoard();
+            ui->label_7->setText(QApplication::translate("mainPanel", "GNSS", 0));
 
             break;
         case FTS_BOARD_TYPE_OUTER_REF:
-            ui->frame_8->setBoard();
-            ui->label_24->setText(QApplication::translate("mainPanel", "外参考", 0));
+            ui->frame_7->setBoard();
+            ui->label_7->setText(QApplication::translate("mainPanel", "外参考", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_8->setLedColor(Qt::green);
+            ui->frame_7->setLedColor(Qt::green);
         else
-            ui->frame_8->setLedColor(Qt::red);
+            ui->frame_7->setLedColor(Qt::red);
     }
 }
 
@@ -465,29 +472,29 @@ void mainPanel::onTimerOut8()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut0 fts_can_poll no response!"  << endl;
-        ui->frame_9->setNullBoard();
-        ui->label_25->setText(QApplication::translate("mainPanel", "参考源", 0));
+        ui->frame_8->setNullBoard();
+        ui->label_8->setText(QApplication::translate("mainPanel", "参考源", 0));
     }
     else
     {
         switch(board_type)
         {
         case FTS_BOARD_TYPE_GNSS:
-            ui->frame_9->setBoard();
-            ui->label_25->setText(QApplication::translate("mainPanel", "GNSS", 0));
+            ui->frame_8->setBoard();
+            ui->label_8->setText(QApplication::translate("mainPanel", "GNSS", 0));
             break;
         case FTS_BOARD_TYPE_OUTER_REF:
-            ui->frame_9->setBoard();
-            ui->label_25->setText(QApplication::translate("mainPanel", "外参考", 0));
+            ui->frame_8->setBoard();
+            ui->label_8->setText(QApplication::translate("mainPanel", "外参考", 0));
             break;
         default:
             break;
         }
 
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_9->setLedColor(Qt::green);
+            ui->frame_8->setLedColor(Qt::green);
         else
-            ui->frame_9->setLedColor(Qt::red);
+            ui->frame_8->setLedColor(Qt::red);
     }
 }
 
@@ -502,14 +509,14 @@ void mainPanel::onTimerOut9()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut9 fts_can_poll no response!"  << endl;
-        ui->frame_10->setLedColor(Qt::red);
+        ui->frame_9->setLedColor(Qt::red);
     }
     else
     {
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_10->setLedColor(Qt::green);
+            ui->frame_9->setLedColor(Qt::green);
         else
-            ui->frame_10->setLedColor(Qt::red);
+            ui->frame_9->setLedColor(Qt::red);
     }
 }
 
@@ -524,14 +531,14 @@ void mainPanel::onTimerOut10()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut9 fts_can_poll no response!"  << endl;
-        ui->frame_11->setLedColor(Qt::red);
+        ui->frame_10->setLedColor(Qt::red);
     }
     else
     {
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_11->setLedColor(Qt::green);
+            ui->frame_10->setLedColor(Qt::green);
         else
-            ui->frame_11->setLedColor(Qt::red);
+            ui->frame_10->setLedColor(Qt::red);
     }
 }
 
@@ -546,14 +553,14 @@ void mainPanel::onTimerOut11()
     if (ret == FTS_CAN_CODE_BOARD_NO_RESPONSE)
     {
         //qDebug() << "onTimerOut9 fts_can_poll no response!"  << endl;
-        ui->frame_12->setLedColor(Qt::red);
+        ui->frame_11->setLedColor(Qt::red);
     }
     else
     {
         if (error == FTS_CAN_CODE_BOARD_OK)
-            ui->frame_12->setLedColor(Qt::green);
+            ui->frame_11->setLedColor(Qt::green);
         else
-            ui->frame_12->setLedColor(Qt::red);
+            ui->frame_11->setLedColor(Qt::red);
     }
 }
 
@@ -562,29 +569,79 @@ BoardButton * mainPanel::toButtonFrame(int slot)
     switch (slot)
     {
     case 0:
-        return ui->frame;
+        return ui->frame_0;
     break;
     case 1:
-        return ui->frame_2;
+        return ui->frame_1;
     break;
     case 2:
-        return ui->frame_3;
+        return ui->frame_2;
     break;
     case 3:
-        return ui->frame_4;
+        return ui->frame_3;
     break;
     case 4:
-        return ui->frame_5;
+        return ui->frame_4;
     break;
     case 5:
-        return ui->frame_6;
+        return ui->frame_5;
     break;
     case 6:
-        return ui->frame_7;
+        return ui->frame_6;
     break;
     case 7:
+        return ui->frame_7;
+    break;
+    case 8:
         return ui->frame_8;
     break;
+    case 9:
+        return ui->frame_9;
+    break;
+    case 10:
+        return ui->frame_10;
+    break;
+    case 11:
+        return ui->frame_11;
+    break;
+    case 12:
+        return ui->frame_12;
+    break;
+    case 13:
+        return ui->frame_13;
+    break;
+    case 14:
+        return ui->frame_14;
+    break;
+    case 15:
+        return ui->frame_15;
+    break;
+    case 16:
+        return ui->frame_16;
+    break;
+    case 17:
+        return ui->frame_17;
+    break;
+    case 18:
+        return ui->frame_18;
+    break;
+    case 19:
+        return ui->frame_19;
+    break;
+    case 20:
+        return ui->frame_20;
+    break;
+    case 21:
+        return ui->frame_21;
+    break;
+    case 22:
+        return ui->frame_22;
+    break;
+    case 23:
+        return ui->frame_23;
+    break;
+
+
     }
 
 }
@@ -594,42 +651,79 @@ QLabel * mainPanel::toButtonLabel(int slot)
     switch (slot)
     {
     case 0:
-        return ui->label_5;
+        return ui->label_0;
     break;
     case 1:
-        return ui->label_8;
+        return ui->label_1;
     break;
     case 2:
-        return ui->label_9;
+        return ui->label_2;
     break;
     case 3:
-        return ui->label_20;
+        return ui->label_3;
     break;
     case 4:
-        return ui->label_21;
+        return ui->label_4;
     break;
     case 5:
-        return ui->label_22;
+        return ui->label_5;
     break;
     case 6:
-        return ui->label_23;
+        return ui->label_6;
     break;
     case 7:
-        return ui->label_24;
+        return ui->label_7;
     break;
     case 8:
-        return ui->label_25;
+        return ui->label_8;
     break;
     case 9:
-        return ui->label_26;
+        return ui->label_9;
     break;
     case 10:
-        return ui->label_28;
+        return ui->label_10;
     break;
     case 11:
-        return ui->label_27;
+        return ui->label_11;
+    break;
+    case 12:
+        return ui->label_12;
+    break;
+    case 13:
+        return ui->label_13;
+    break;
+    case 14:
+        return ui->label_14;
+    break;
+    case 15:
+        return ui->label_15;
+    break;
+    case 16:
+        return ui->label_16;
+    break;
+    case 17:
+        return ui->label_17;
+    break;
+    case 18:
+        return ui->label_18;
+    break;
+    case 19:
+        return ui->label_19;
+    break;
+    case 20:
+        return ui->label_20;
+    break;
+    case 21:
+        return ui->label_21;
+    break;
+    case 22:
+        return ui->label_22;
+    break;
+    case 23:
+        return ui->label_23;
     break;
     }
+    return NULL;
 }
 
 #if 1
@@ -643,7 +737,7 @@ void mainPanel::cmdProcessTask()
     struct can_frame recv_frame;
 
 #if 1//zbl test
-    return 0;
+    return;
 #endif
     sock = socket(PF_CAN, SOCK_RAW, CAN_RAW);
     if(sock < 0) {
@@ -659,7 +753,7 @@ void mainPanel::cmdProcessTask()
     if(ret && ifr.ifr_ifindex == 0)
     {
         printf("Can't get interface index for can0, code= %d, can0 ifr_ifindex value: %d, name: %s\n", ret, ifr.ifr_ifindex, ifr.ifr_name);
-        close(sock);
+        ::close(sock);
         exit(1);
     }
 
@@ -672,7 +766,7 @@ void mainPanel::cmdProcessTask()
     setsockopt(sock, SOL_CAN_BASE + CAN_RAW, 0x4, &recv_own_msgs, sizeof(recv_own_msgs)); //???????
     if (bind(sock,(struct sockaddr*)&addr,sizeof(addr))<0) {
         printf("bind error\n");
-        close(sock);
+        ::close(sock);
         exit(1);
     }
 
@@ -753,7 +847,6 @@ void mainPanel::cmdProcessTask()
         //boardInsterted(int slot, int boardType)
     }
 
-    close(sock);
-    return 0;
+    ::close(sock);
 }
 #endif

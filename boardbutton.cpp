@@ -111,25 +111,46 @@ void BoardButton::setLedColor(const Qt::GlobalColor &color)
 
 }
 
-void BoardButton::setLedColor_sub1(const Qt::GlobalColor &s1)
+void BoardButton::setLedColor_sub1(const Qt::GlobalColor &color)
 {
-
+    if (color == Qt::green)
+        ui->widget_2->setStyleSheet(QString("image: url(:/new/prefix1/img/green_led.bmp);"));
+    else if (color == Qt::gray)
+        ui->widget_2->setStyleSheet(QString("image: url(:/new/prefix1/img/gray_led.bmp);"));
+    else if (color == Qt::red)
+        ui->widget_2->setStyleSheet(QString("image: url(:/new/prefix1/img/red_led.bmp);"));
 }
 
-void BoardButton::setLedColor_sub2(const Qt::GlobalColor &s1)
+void BoardButton::setLedColor_sub2(const Qt::GlobalColor &color)
 {
-
+    if (color == Qt::green)
+        ui->widget_3->setStyleSheet(QString("image: url(:/new/prefix1/img/green_led.bmp);"));
+    else if (color == Qt::gray)
+        ui->widget_3->setStyleSheet(QString("image: url(:/new/prefix1/img/gray_led.bmp);"));
+    else if (color == Qt::red)
+        ui->widget_3->setStyleSheet(QString("image: url(:/new/prefix1/img/red_led.bmp);"));
 }
 
-void BoardButton::setLedColor_sub3(const Qt::GlobalColor &s1)
+void BoardButton::setLedColor_sub3(const Qt::GlobalColor &color)
 {
-
+    if (color == Qt::green)
+        ui->widget_4->setStyleSheet(QString("image: url(:/new/prefix1/img/green_led.bmp);"));
+    else if (color == Qt::gray)
+        ui->widget_4->setStyleSheet(QString("image: url(:/new/prefix1/img/gray_led.bmp);"));
+    else if (color == Qt::red)
+        ui->widget_4->setStyleSheet(QString("image: url(:/new/prefix1/img/red_led.bmp);"));
 }
 
-void BoardButton::setLedColor_sub4(const Qt::GlobalColor &s1)
+void BoardButton::setLedColor_sub4(const Qt::GlobalColor &color)
 {
-
+    if (color == Qt::green)
+        ui->widget_5->setStyleSheet(QString("image: url(:/new/prefix1/img/green_led.bmp);"));
+    else if (color == Qt::gray)
+        ui->widget_5->setStyleSheet(QString("image: url(:/new/prefix1/img/gray_led.bmp);"));
+    else if (color == Qt::red)
+        ui->widget_5->setStyleSheet(QString("image: url(:/new/prefix1/img/red_led.bmp);"));
 }
+
 void BoardButton::mousePressEvent(QMouseEvent *event)
 {
     this->setFrameShadow(QFrame::Sunken);
