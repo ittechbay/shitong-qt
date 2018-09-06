@@ -184,7 +184,7 @@ int fts_can_send_and_recv(struct can_frame *send_frame, struct can_frame *recv_f
 	int ret;
 	int recv_own_msgs = 0; //set loop back:  1 enable 0 disable
 
-#if 1//zbl test
+#if 0//zbl test
     return 1;
 #endif
 	sock = socket(PF_CAN, SOCK_RAW, CAN_RAW);

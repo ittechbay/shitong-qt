@@ -24,6 +24,7 @@ private slots:
     void on_pushButton_clicked();
 
     void onTimerOutMain();
+    /*
     void onTimerOut0();
     void onTimerOut1();
     void onTimerOut2();
@@ -36,19 +37,14 @@ private slots:
     void onTimerOut9();
     void onTimerOut10();
     void onTimerOut11();
-
+    */
     void on_frame_3_clicked();
-
     void on_frame_4_clicked();
-
-
-
-
     void on_pushButton_2_clicked();
-
     void on_pushButton_4_clicked();
     void cmdProcessTask();
-
+     void  pwrChangeLed(int slot, int error);
+     void  gnssChangeLed(int slot, int error);
 private:
     Ui::mainPanel *ui;
     QTimer *timer;

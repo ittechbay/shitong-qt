@@ -17,7 +17,8 @@ SOURCES += \
     settime.cpp \
     statetable.cpp \
     widget.cpp \
-    ftsCan.c
+    ftsCan.c \
+    ftscmdthread.cpp
 
 HEADERS += \
     boardbutton.h \
@@ -31,7 +32,8 @@ HEADERS += \
     setptp.h \
     settime.h \
     statetable.h \
-    widget.h
+    widget.h \
+    ftscmdthread.h
 
 FORMS += \
     boardbutton.ui \
